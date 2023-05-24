@@ -62,6 +62,20 @@
       const walk = (x - startX) * 3;
       itemsContainer.scrollLeft = scrollLeft - walk;
     });
+	it('should slide over to subsequent cubes on click and drag', () => {
+  cy.get('.items')
+    .trigger('mousedown', { which: 1, pageX: 493, pageY: 391 })
+    .trigger('mousemove', { which: 1, pageX: 271, pageY: 391 })
+    .trigger('mouseup');
+
+  cy.wait(1000); // Adjust the delay as needed
+
+  cy.get('.items').should(($items) => {
+    expect($items[0].scrollLeft).to.be.greaterThan(0);
+  });
+});
+
+
 </script>
 
   </body>
