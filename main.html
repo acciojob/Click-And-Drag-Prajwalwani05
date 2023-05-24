@@ -36,6 +36,32 @@
 
 <script>
 //Your code goes here 
+	const itemsContainer = document.querySelector('.items');
+
+    let isMouseDown = false; // Flag to track mouse down/up
+    let startX; // Starting mouse X position
+    let scrollLeft; // Starting scrollLeft position
+
+    // Mouse down event listener
+    itemsContainer.addEventListener('mousedown', (e) => {
+      isMouseDown = true;
+      startX = e.pageX - itemsContainer.offsetLeft;
+      scrollLeft = itemsContainer.scrollLeft;
+    });
+
+    // Mouse up event listener
+    itemsContainer.addEventListener('mouseup', () => {
+      isMouseDown = false;
+    });
+
+    // Mouse move event listener
+    itemsContainer.addEventListener('mousemove', (e) => {
+      if (!isMouseDown) return;
+      e.preventDefault();
+      const x = e.pageX - itemsContainer.offsetLeft;
+      const walk = (x - startX) * 3;
+      itemsContainer.scrollLeft = scrollLeft - walk;
+    });
 </script>
 
   </body>
